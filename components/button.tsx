@@ -12,4 +12,6 @@ const SubmitButton = memo(({ onClick, isLoading, isEditMode }: { onClick: () => 
   );
 });
 
+SubmitButton.displayName = "SubmitButton";
+
 export default SubmitButton;

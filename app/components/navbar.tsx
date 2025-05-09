@@ -3,6 +3,7 @@
 
 import { useModal } from "@/hooks/use-auth-modal";
 import { useAuth } from "../contexts/authcontext";
+import Link from "next/link";
 
 const Navbar = () => {
   const { isAuthenticated, logout } = useAuth();
@@ -11,7 +12,7 @@ const Navbar = () => {
   return (
     <nav className="w-full px-6 py-4 bg-white shadow flex items-center justify-between">
       <div className="text-2xl font-bold text-gray-800 cursor-pointer">
-        <a href="/">DevCv</a>
+        <Link href="/">DevCv</Link>
       </div>
 
       <div className="space-x-4">

@@ -1,5 +1,4 @@
-import Navbar from "./components/navbar";
-import Image from "next/image";
+import Image from 'next/image';
 import Link from "next/link";
 
 
@@ -26,9 +25,14 @@ export default function Home() {
           Get started
         </Link>
         </div>
-        <div className="w-full md:w-1/2 py-2">
-          <img src="/assets/IMG.png" alt="Description of image" className="w-full rounded-lg" />
-        </div>
+        <div className="w-full md:w-1/2 py-2 relative aspect-[4/3]"> {/* Adjust aspect ratio as needed */}
+  <Image
+    src="/assets/IMG.png"
+    alt="Description of image"
+    fill
+    className="rounded-lg object-cover"
+  />
+</div>
       </div>
       <section className="mt-5">
         <h2 className="text-2xl font-bold text-center mb-12">

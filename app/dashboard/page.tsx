@@ -35,8 +35,8 @@ export default function DashboardPage() {
       try {
         const data = await getUserResumes();
         setResumes(data);
-      } catch (err) {
-        console.error("Failed to fetch resumes", err);
+      } catch  {
+        console.error("Failed to fetch resumes");
         toast.error("Failed to fetch your resumes.");
       }
     };
@@ -51,9 +51,10 @@ export default function DashboardPage() {
       setResumes((prev) => prev.filter((r) => r.id !== deleteId));
       setDeleteId(null);
       toast.success("Resume deleted.");
-    } catch (err) {
-      toast.error("Failed to delete resume.");
-    }
+  } catch {
+  toast.error("Failed to delete resume.");
+}
+
   };
 
   return (

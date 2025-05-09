@@ -22,6 +22,7 @@ const SignUpForm = ({ onSuccess }: SignUpFormProps) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
     if (password !== confirm) {
       toast.error("Passwords do not match");
       return;
@@ -32,12 +33,24 @@ const SignUpForm = ({ onSuccess }: SignUpFormProps) => {
       setAuth(response.token);
       toast.success("Account created successfully!");
       onSuccess?.();
-    } catch (err: any) {
-      const message =
-        err.response?.status === 400 && err.response?.data?.message
-          ? err.response.data.message
-          : "User already exists";
-      toast.error(message.includes("already") ? "Email already in use" : message);
+    } catch (err: unknown) {
+      let errorMessage = "User already exists";
+
+      if (
+        typeof err === "object" &&
+        err !== null &&
+        "response" in err &&
+        typeof (err as { response?: unknown }).response === "object"
+      ) {
+        const response = (err as { response: { status?: number; data?: { message?: string } } }).response;
+        if (response.status === 400 && response.data?.message) {
+          errorMessage = response.data.message.includes("already")
+            ? "Email already in use"
+            : response.data.message;
+        }
+      }
+
+      toast.error(errorMessage);
       console.error("Sign up failed", err);
     }
   };
